@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <math.h>
+
+#define h 0.01
+#define inicio 0.0
+#define fin 4.0
+#define numCuad 1000
+
+int main (void)
+{
+  double delta = (inicio-fin)/numCuad;
+  printf("El volumen del solido de rovolucion es %lf",  integral_centro( delta));
+}
+
+/*
+** Calcula la integral usando el método del centro.
+** @param dx Ancho de los intervalos.  delta = (inicio-fin)/numCuad o intervalos
+** @return Aproximación de la integral.
+*/
+double integral_centro(double delta)
+{
+    double i = 0;
+    double a = 0;
+
+    for (i = inicio + delta / 2; i < fin; i += delta)
+        a += (F(i) * delta);
+    return a;
+}

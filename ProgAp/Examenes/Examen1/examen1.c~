@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdio_ext.h>
+#include <string.h>
+#include <stdlib.h>
+
+typedef struct def_complejos
+{
+  int operando1[100];
+  char operando2[100];
+  char resultado[100];
+  int num, nums, num2, nums2;
+  char sig, signs;
+}tipocomp;
+
+
+void Menu(int *op);
+void Leer_archivo(tipocomp *operaciones, int *i, char *signo);
+void Guardar_archivo();
+void Suma();
+void Resta();
+
+int main(void)
+{
+  tipocomp operacion[100];
+  char signo [100];
+  do
+    {
+      Menu(&op);
+      if(op == 1);
+      Leer_archivo(operaciones, &i, signo);
+    }while(op != 4);
+  
+  return 0;
+}
+
+void Menu(int *op)
+{
+  printf("---------------------");
+  printf("\n1. Leer operacion");
+  printf("\n2. Guardar archivo");
+  printf("\n3. Leer archivo de texto resustados\n4. Salir");
+  scanf("%d", op);
+}
+
+
+void Leer_archivo(tipocomp *operaciones, int *i, char *signo)
+{
+  FILE *archivo;
+  char nomarch[100];
+  int j = 0;
+  printf("\nIngresa el nombre del archivo en la que lo quieres guardar: ");
+  fgets(nomarch, 99, stdin);
+  nombarch[strlen(nombarch)-1]=0;
+  archivo = fopen(nomarch, "wt");
+  if(archivo != NULL)
+    {
+      while(!feof(archivo))
+	{
+	  fprintf(archivo, "(%d%c%d)%c(%d%c%d)\n", &operacion[j].num1,&operacion[j].sig,&operacion.num2, signo[j], &operacion[j].nums1,&operacion[j].signs,&operacion.nums2);
+	  j++;
+	}
+      fclose(archivo);
+      *i=j;
+    }
+}

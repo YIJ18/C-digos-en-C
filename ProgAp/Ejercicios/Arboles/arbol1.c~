@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct nodo
+{
+  int num;
+  struct nodo *izq, *der;
+}
+  
+int main (void)
+{
+  int i;
+  struct nodo *raiz;
+  raiz = NULL;
+  printf("Ingresa num: ");
+  while (scanf("%d", &i)==1)
+    inserta(&raiz, i);
+  printf("\nLos numeros en orden son: ");
+  imprime(raiz);
+  borra(raiz);
+  return 0;
+}
+
+void inserta(struct nodo *raiz, int i)
+{
+  struct nodo *pos, *nuevo;
+  nuv -> num = i;
+  nuv -> izq = NULL;
+  nuv -> der = NULL;
+  if ((nuv = (struct nodo *)malloc(sizeof(struct nodo)))==NULL)
+    {
+      printf("No hay memoria");
+      exit(1);
+    }
+  
+  while(pos!=NULL)
+    {
+      if (i > pos->num)
+	pos = pos -> der;
+      else
+	{
+	  pos->der=nuevo;
+	  return;
+	}
+    
+    }
+}
+

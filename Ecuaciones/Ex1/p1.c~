@@ -1,0 +1,41 @@
+/*
+Para determinar la concavidad de una función se deben determinar los máximos y/o mínimos de la función;
+para esto, usando la primera derivada, hay que encontrar el punto (o los puntos) de la abscisa en el que la
+pendiente es cero. Con este valor de abscisa hay que encontrar la segunda derivada de la función y si es posi;vo,
+la concavidad es hacia arriba; en caso contrario la concavidad es hacia abajo.
+Mediante un programa en C, obtenga la primera derivada de la función en un intervalo dado y recorra los valores
+de la pendiente hasta encontrar el valor de cero; se recomienda u;lizar método central, aunque puede usar el
+método de su preferencia. Conserve el valor o valores de x en los que la pendiente es cero (raíces) y calcule la
+segunda derivada, determinando si el resultado es posi;vo o nega;vo. En caso de que en el intervalo existan
+dos o más valores de pendiente cero, calcular para cada uno de ellos la concavidad. Documente los resultados
+que obtenga.
+La función por analizar, en el intervalo de -4 a 4, es:
+�(�) = �! − 3�" − 9� + 5
+También puede obtener el valor de la o las raíces usando el método de Newton-Raphson. Emplee el método de
+su preferencia
+ */
+
+
+double n_derivada_central(double x, int n);
+
+int main(void)
+{
+  printf("Ejercicio 1\n");
+  
+  return 0;
+}
+
+/**
+ * Calcula la n-ésima derivada adelante de F(x) en el punto x
+ *
+ * @param x Punto en el que se calcula la derivada
+ * @param n Orden de la derivada
+ * @return El valor de la n-ésima derivada adelante
+ */
+double n_derivada_central(double x, int n)
+{
+    if (n == 0)
+        return F(x);
+    else
+        return (n_derivada_central(x + h, n - 1) - n_derivada_central(x - h, n - 1)) / (2 * h);
+}

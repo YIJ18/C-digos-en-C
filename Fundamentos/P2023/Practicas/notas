@@ -1,0 +1,9 @@
+do{
+    strcat(numero, letra);
+    Coordenadas_t[i][j]= letra;
+
+    i++;
+    j++;
+
+
+}while(letra=!NULL && numero!=NULL);

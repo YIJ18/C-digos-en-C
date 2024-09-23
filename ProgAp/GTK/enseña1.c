@@ -1,0 +1,13 @@
+#include <gtk-2.0/gtk/gtk.h>
+
+int main(gint argc, gchar *argv[])
+{
+    gtk_init(argc, &argv);
+    GtkWidget *window;
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+
+    g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    // mostrar toda la ventana
+    gtk_widget_show_all(window);
+    gtk_main();
+}

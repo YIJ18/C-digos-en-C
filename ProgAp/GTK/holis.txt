@@ -1,0 +1,7 @@
+Nombre: n  �
+Teléfono: 0
+Sexo: 
+Fecha de Cumpleaños: 91/2/48
+Edad: 0
+Número de Cuenta: 
+Estatus: 0

@@ -1,0 +1,9 @@
+
+#include <stdio.h>
+
+int linea(int lado);
+
+int main (void) {
+	int lado, y, z;
+	y=0:
+	printf("Introduce

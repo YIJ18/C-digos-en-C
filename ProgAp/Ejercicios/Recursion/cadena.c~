@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+
+void Ingresar(char *cadena);
+void voltea(char *cadena, int cont, int cont2);
+
+int main (void)
+{
+  char cadena[100];
+  int cont = 0, cont2; 
+  Ingresar(cadena);
+  cont2=strlen(cadena);
+  voltea(cadena, cont, cont2-1);
+  puts(cadena);
+  return 0;
+}
+void Ingresar(char *cadena)
+{
+  printf("Ingresa la cadena: ");
+  gets(cadena);
+}
+
+void voltea(char *cadena, int cont, int cont2)
+{
+  char temp;
+  if (cadena[cont] == '\0')
+    {
+    temp = cadena[cont];
+    cadena[cont]=cadena[cont2];
+    cadena[cont2]=temp;
+    voltea(cadena, cont++, cont2--);
+    }
+  
+}

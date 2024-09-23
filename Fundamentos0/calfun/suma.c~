@@ -1,0 +1,10 @@
+
+
+int suma(int num1,int num2)
+{
+  int resultado;
+  printf("%d", num1);
+  resultado= num1 + num2;
+
+  return resultado;
+}

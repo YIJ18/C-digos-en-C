@@ -1,0 +1,68 @@
+#include <stdio.h>
+void minus(char arr1[]);
+int cadena(char arr1[]);
+
+int main(void) {
+  char arr1[100];
+
+  printf("Ingresa la primera frase: ");
+  scanf("%[^\n]",arr1);
+
+  
+  if(cadena (arr1)==0){
+    printf("La frase ingresada no es un palíndromo");
+  }
+  if(cadena (arr1)==1){
+    printf("La frase ingresada es un palíndromo");
+  }
+
+  
+  return 0;
+}
+
+int cadena(char arr1[]){
+  int i, contador=0, x=0, y=0, z=0;
+  minus(arr1);
+  
+  while (arr1[x]!='\0')
+    {
+      x++;
+      z++;
+      }
+  
+  for(i=0; i<100; i++){
+   z--;
+    
+    if(arr1[i] == '\0')
+    {
+      i=100;    }
+
+    
+    if(arr1[i] == arr1[z]){
+      contador++;
+      printf("");
+      }
+    
+  }
+
+  
+  if(contador != x)
+  {
+   return 0;
+  }
+  
+  if (contador == x)
+  {
+    return 1;
+  }
+
+}
+
+void minus(char arr1[]){
+  int y;
+   for(y=0;y<arr1[y];y++){
+     if(arr1[y]<='Z' && arr1[y]>='A'){
+       arr1[y] = arr1[y]+32;
+     }
+    }
+}

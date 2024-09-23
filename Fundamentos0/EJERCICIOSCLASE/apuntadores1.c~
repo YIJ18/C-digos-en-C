@@ -1,0 +1,44 @@
+#include<stdio.h>
+void calcular(int l1, int l2, int l3, int* a, int* v);
+void leer(int* dato);
+
+int main(void){
+  int base=0;
+  int altura=0;
+  int profundidad=0;
+
+  int area=0;
+  int peri=0;
+  int volumen=0;
+  
+  printf("Ingresa la base: ");
+  leer(&base);
+  printf("\nIngresa la altura: ");
+  leer(&altura);
+  printf("\nIngresa la profundidad: ");
+  leer(&profundidad);
+
+  printf("\nPeri: %d ", perimetro);
+   printf("\nPeri: %d ", area);
+    printf("\nPeri: %d ", volumen);
+  
+  calcular(base, altura, profundidad, &perimetro, &area, &volumen);
+  
+  return 0;
+}
+/*
+ *
+ *
+ *
+ */
+void leer(int* dato){
+  scanf("%i", dato)
+
+}
+void calcular(int base, int altura, int profundidad, int* peri, int* area, int* vol){
+  int perimetro= (base * 2) + (altura * 2);
+  *peri = perimetro;
+  *area = perimetrobase* altura;
+  *vol = *area * profu;
+  
+}

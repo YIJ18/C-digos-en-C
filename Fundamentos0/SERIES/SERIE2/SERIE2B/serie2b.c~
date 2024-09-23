@@ -1,0 +1,86 @@
+
+1;95;0c#include <stdio.h>
+
+
+/*Este programa compara dos cadenas*/
+
+int cadena(char arr1[], char arr2[]);
+void minus(char arr1[], char arr2[]);
+
+int main(void) {
+  char arr1[100];
+  char arr2[100];
+
+  printf("Ingresa la primera frase: ");
+  scanf("%[^\n]",arr1);
+
+  printf("Ingresa la segunda frase: ");
+  getchar();
+  scanf("%[^\n]",arr2);
+
+  if(cadena (arr1, arr2)==0){
+    printf("Las cadenas son diferentes");
+  }
+  if(cadena (arr1, arr2)==1){
+    printf("Las cadenas son iguales");
+  }
+
+
+  return 0;
+}
+
+/* Está función compara dos arreglos para evaluar si, estos dos son inguales.
+**
+** @param arr1: arr1 viene siendo nustra primera cadena a comparar.
+** arr2: arr2 es nuestra segunda cadena a comparar con arr1.
+**
+** @return regresa un '0', en caso de que las dos cadenas sean diferentes,
+** regresa un '1', en caso de que las dos cadenas sean iguales.
+*/
+
+int cadena(char arr1[], char arr2[]){
+  int i, x, contador=0,y;
+  x=0;
+  y=0;
+  minus(arr1,arr2);
+  while (arr1[x]!='\0' || arr2[y]!='\0')
+    {
+      x++;
+      y++;
+    }
+
+  for(i=0; i<100; i++){
+    if(arr1[i]=='\0'||arr2[i]=='\0')
+      {
+	i=100;
+      }
+    if(arr1[i]==arr2[i]){
+      contador++;
+    }
+
+  }
+
+  if(contador != x)
+    {
+      return 0;
+    }
+  if (contador == x && contador == y)
+    {
+      return 1;
+    }
+
+}
+
+void minus(char arr1[], char arr2[]){
+  int y;
+  for(y=0;y<arr1[y];y++){
+    if(arr1[y]<='Z' && arr1[y]>='A'){
+      arr1[y] = arr1[y]+32;
+    }
+  }
+  for(y=0;y<arr2[y];y++){
+    if(arr2[y] <= 'Z' && arr2[y]>='A'){
+      arr2[y]=arr2[y]+32;
+    }
+  }
+}

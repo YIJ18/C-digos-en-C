@@ -1,0 +1,145 @@
+#prueba{
+	font-family: Verdana;
+	color: #FFFFFF;
+	font-size: 15px;
+	position: absolute;
+	top:140px;
+	left:150px;
+	background: #AEAE5E;
+	width: 400px;
+	height: 100px;
+	text-align: left;
+	z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+.prueba{
+	font-family: Arial;
+	color: #FA0000;
+	font-size: 12px;
+	background: #FADCAB;
+	position: relative;
+	top: 5px;
+	left: 15px;
+	width: 90px;
+	height: 20px;
+	overflow: auto;
+	z-index: -1;
+	
+}
+
+
+
+
+.title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bolder;
+	color: #503A1F;
+	font-size: 17px;	
+}
+
+#title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bolder;
+	color: #503A1F;
+	font-size: 17px;	
+}
+
+.courier {
+	font-family: courier;
+	/*font-weight: bold;*/
+	color: #FF0000;
+	font-size: 15px;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+table.colourTable{
+	background-color: #FF0000;
+}
+
+tr.title {
+	font-family: Verdana;
+	font-weight: bold;
+	background: #AEAE5E;
+	color: #F5F9E4;
+	/*text-align: center;*/
+	font-size: 12px;
+}
+
+tr.non {
+	background: #B2B2B2;
+}
+
+tr.par {
+	background: #CCCCCC;
+}
+
+td.dato, td.dato_texto, td.dato_fecha, td.dato_numero {
+	font-size: 12px;
+	font-family: Tahoma;
+/*	font-weight: 900; */
+	color: #000000;
+	text-align: left;
+}
+
+
+td.titulo, td.titulo_texto {
+	font-size: 12px;
+	font-family: Tahoma;
+	font-weight: 900;
+	text-align: center;
+}
+
+.comLink:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12px;
+	color: #10AC05;
+}
+
+.comLink:visited {
+	font-family: Helvetica, sans-serif; 
+	font-size: 25px;
+	color: #0000FF;
+}
+
+.comLink:hover {
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 9px;
+	color: #FFAA10;
+}
+
+.comLink:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 29px;
+	color: #990033;
+}
+
+
+
+
+
+

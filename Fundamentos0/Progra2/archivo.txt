@@ -1,0 +1,745 @@
+ic22iph@antares:~/progra2$ more apuntes.txt 
+        ---------------------------------------
+	    ---1.COMPONENTES DE UN PROGRAMA EN C---
+	    ---------------------------------------
+1.Archivos de inclusión
+    -#include 
+2.Definición de constantes
+    -#define PI 3.1416
+    -const float PI = 3.1416;
+3.Definición de tipos
+    -typedef
+        *Ejemplo: typedef int contador;
+                  contador x,y,z;
+4.Prototipos de funciones
+    -tipoDato NombreFuncion (argumentos);
+        *Ejemplo: int suma (int num1, int num2);
+5.Definición de funciones
+    *Ejemplo:
+        int suma (int num1, int num2){
+            int re = num1+num2;
+            return re;
+        }
+        ---------------------------------------------
+        ---2.ARGUMENTOS DESDE LA LÍNEA DE COMANDOS---
+        ---------------------------------------------
+Existen 2 "prototipos" para la funcion main:
+*int main (void) - Sin linea de comandos
+*int main (int argc, char *argv[]) - Con linea de comando
+    Donde:
+        argc (argument counter) - Es el contador de argumentos
+        *argv[] (argument value) - Es un arreglo de apuntadores
+[] = *
+*[] = [][] = **
+Programa ejemplo:
+#include <stdio.h>
+int main (int argc, char *argv[]){
+    int i;
+    printf ("Numero de argumentos: %d\n", argc);
+    for (i=1; i<arc; i++){
+        printf ("%s\n", argv[i]);
+    }
+    return 0;
+}
+        ------------------------
+        ---3.SSCANF Y SPRINTF---
+        ------------------------
+La primera s de las funciones es de "string"
+       
+SSCANF:
+char cadena[25] = "128 hola 3";
+int numero;
+char palabra1[10];
+int numero2;
+sscanf(cadena, "%d %s %d", &numero, palabra, &numero2);
+    El primer argumento es de donde se va a leer
+    El segundo el tipo de dato al que se va a convertir
+    El tercero el nombre de la variable donde se va a guardar
+    
+SPRINTF:
+Imprime algo a una cadena
+char cadena[25] = "128 hola 3";
+int numero;
+char palabra1[10];
+int numero2;
+char frase[25];
+sprintf(frase, "El valor leido fue: %d", numero);   
+    
+    
+        ---------------------------
+        ---4.COMPILACION MODULAR---
+        ---------------------------
+Se puede dividir un programa en archivos llamados "modulos", cada uno debe seguir la estructura de C (Tema 1)
+Debe existir un modulo principal que debe contener la funcion main y los prototipos de funciones, en los demas archivos
+ir en un modulo separado, o cada funcion en un archivo diferente
+Para compilarlo se puede hacer uso de un makefile, este es un archivo de texto, llamado "Makefile" ubicado en el mismo directorio
+que los modulos
+    ---Como hacer un Makefile---
+    
+    ---------------------------------------------------------
+    |programa.out: principal.o funciones.o                  |   -Objetivo final (Programa ejecutable), Dependencias
+    |   gcc -o programa.out principal.o funciones.o         |   -al inicio debe lleva un tabulador
+    |                                                       |   -Debe llevar una linea en blanco
+    |principal.o: principal.c                               |
+    |   gcc -c principal.c                                  |
+    |                                                       |
+    |funciones.o: funciones.c                               |
+    |   gcc -c funciones.c                                  |
+    |                                                       |
+    |clean:                                                 |
+    |   rm *.o                                              |
+    |                                                       |   -Al final tambien debe haber un salto de linea
+    ---------------------------------------------------------
+    
+Para indicar algun objetivo se hace de la siguiente forma:
+    make [objetivo]
+        *Ejemplo: make principal.o
+Los objetivos siempre tienen que ser mas nuevos que las dependencias.o
+local.h
+Sirve para hacer un "copy" y un "paste" en el programa y ahorrarse la modificacion de cada modulo
+    ---------------------
+    |typedef estruct {  |
+    |.                  |
+    |.                  |
+    |.                  |
+    |} complejo;        |
+    ---------------------
+    
+    
+    
+        -------------------
+        ---5.APUNTADORES---
+        -------------------
+Es una variable que contiene la direccion de otra variable, guarda o apunta a una direccion de memoria
+Tiene la siguientes reglas basicas:
+    *Un apuntador apunta a una variable en la memoria de la computadora
+    *Siguen las mismas reglas que otras variables y deben ser unicos
+ 
+Operador de direccion (&): Para obtener la direccion de una variable
+Operador de contenido (*): Para acceder al contenido de una direccion
+    --Declaracion de apuntadores--
+TipoDato *Nombre;
+int *p;
+Ejemplo:
+int x = 25;
+int y = 3;
+int *p-x;
+p-x = &x;
+        ------------------------------------------------
+        ---6.Apuntadores NULL Y apuntadores tipo void---
+        ------------------------------------------------
+Apuntador con un valor conocido pero que aun no es una direccion valida
+    int *p-x = NULL;
+Cuando existe un apuntador tipo void se hace referencia a un apuntador generico, o sea que puede guardar direcciones de variables de cualquier tipo
+    void *p;
+Ejemplo;
+#include <stdio.h>
+int main (void){
+    int numero = 1;
+    char letra = 'A';
+    void *ptr;
+    
+    ptr = &numero;
+    printf ("El valor es %d\n", *((int*)ptr));
+    
+    ptr = &letra;
+    printf ("El valor es: %c\n", *((char*)ptr));
+}
+    *((TipoDato*)NombrePuntero);
+        ------------------------------
+        ---7.ARREGLOS Y APUNTADORES---
+        ------------------------------
+int numero [5];
+int *p_numeros;
+char palabra [5] = "hola";
+p_numeros = numeros;
+for (int i=0; i<5; i++){
+    printf ("%d\n", numeros[i]);
+    o tambien se puede imprimir:
+    printf ("%d\n", *numeros+i);
+    
+    printf ("%d\n", *(p_numeros+i));
+    printf ("%d\n", p_numeros[i]);
+}
+Un arreglo puede ser tratado como apuntador y viceversa
+        -----------
+        ---8.GDB---
+        -----------
+gdb - Debuguear programa, sirve para ver donde hay un error
+Se hace una vez compilado el programa, se utiliza un "-g"
+    Ejemplo:
+    gcc -g -c programa.c
+Para hacerlo dentro de emacs:
+    1.Teclear escape
+    2.Poner x gdb
+    3.Dar enter
+Para ver cierto numero de lineas se pone:
+    list NumeroInicio, NumeroFin
+    Ejemplo:
+        list 5, 20
+    ---Breakpoint---
+corresponde a la función en la cual se detendrá la ejecución del programa, una dirección de memoria o el número de la línea en el código fuente.
+b main
+b funciones
+info breakpoints
+delete NombreBreakpoint
+disable - Sirve para deshabilitar un numero de breakpoint
+    Ejemplo: disable 2
+Si ponemos print (p) NombreVariable, podemos ver que valor tiene una variable
+    Ejemplo: print n
+El comando next (n) Sirve para correr el programa "linea a linea"
+La funcion step (s) se mete a las funciones hecha por nosotros, si es una funcion propia de C, gdb se traba
+        ------------
+        ---10.GIT---
+        ------------
+Ramas en GIT:
+git log --oneline - Permite regresar a un commit en particular indicando su id
+    git reset ID - Permite cambiar entre commits
+git branch Nombre - Permite crear una rama
+git checkout Nombre - Permite cambiar entre ramas
+git merge Nombre - Permite unir 2 commits de diferentes ramas
+git branch -d Nombre - Permite borrar una rama
+        -----------------
+        ---11.ARCHIVOS---
+        -----------------
+Sirven para guardar informacion sin que se pierda, al final de todo arhivo existe un caracter llamado 'EOF' que indica el fin del archivo, hay 2 tipos:
+    1.De texto - Lo puede abrir cualquier editor de texto
+        -Contienen caracteres legibles 
+    2.Binario - Solo pueden ser abiertos en el programa que los creo
+        -Contienen paquetes de informacion 
+        
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Se trabajan de la siguiente forma:
+    1.Abrir el archivo:
+        Se utiliza la funcion:
+        fp = fopen (Nombre_Archivo_Abrir, Modo);
+            Modo:
+                "w" - write - escritura
+                "r" - read - lectura
+                "a" - append - agregar
+        
+        fp = fopen ("archivo.txt", "r");      
+        if (fp == NULL){
+            printf ("El archivo no exite\n");
+            exit (1);
+        }
+        
+        
+        El usuario puede dar el nombre del archivo de la sig manera:
+        char nombre [25];
+        scanf ("%[^\n]", nombre);
+        fp = fopen (nombre, "r");
+        
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+    2.Leer o escribir en el archivo (normalmente es un ciclo):
+        Se declara un tipo de dato "FILE *fp;" que es un puntero tipo file, es la unica manera de manejar archivos
+        
+        Por ejemplo para leer desde un ARCHIVO podemos usar:
+            fscanf (fp, "%d", &x);
+        Para imprimir:
+            fprintf (fp, "El valor de %d es", x);
+        
+        Tambien se puede leer e imprimir CARACTER POR CARACTER con la funcion:
+            c = getc (fp);
+            donde c es una variable tipo char y fp el apuntador tipo file
+            
+            putc (c, fp);
+            donde c es una variable tipo caracter a imprimir, o se puede poner en comillas simples para imprimir el caracter, y fp es el apuntador tipo file
+            
+        Se puede leer LINEA POR LINEA con la funcion:
+            fgets (str, Numero_de_caracteres, fp);
+            donde str es un arreglo char donde se guardara, numero_de_caracteres tiene su valor -1, y fp es el apuntador file
+            
+            fputs (str, fp);     
+              
+            ---------------------
+            ---Ciclo para leer---
+            ---------------------
+        La funcion scanf regresa el numero de argumentos que logro leer
+        
+        Para leer dato por dato:
+            while ( fscanf(fp, "%d", &x) == 1){
+                ----- //hacer algo con la variable del fscanf dependiendo del programa
+            }
+            
+        Para leer caracter por caracter:
+            while ( (c = getc(fp)) != EOF){
+                -----
+            }
+            
+        Para leer linea por linea:
+            while ( fgets(str,23,fp) != 0){
+                -----
+            }
+            
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+    3.Cerrar el archivo:
+        Se utiliza la funcion:
+        fclose (fp);
+        --------------------------
+        ---12.ARCHIVOS BINARIOS---
+        --------------------------
+Guardan paquetes de informacion, por lo tanto solo el programa que los crea los puede leer.
+Se siguen los mismos 3 pasos que en los archivos de texto
+    1.Abrir el archivo
+        Modos:
+            -Escritura: "wb" o "w+b"
+            -Lectura: "rb" o "r+b"
+            -Append: "ab" o "a+b"
+    
+    2.Lectura y escritura: 
+        Para leer se usa la funcion:
+            fread (Direccion_De_Variable, Tamaño_De_Variable, Numero_Paquetes, fp);
+        Para escribir se usa la funcion:
+            fwrite (Direccion_De_Variable, Tamaño_De_Variable, Numero_Paquetes, fp);
+        Donde 
+        *Direccion_De_Variable - es normalmente con un amperson (&) o con un apuntador
+        *Tamaño_De_Variable - se pone sizeof(TipoDato)
+        *Numero_Paquetes - Numero de paquetes a imprimir/leer en el archivo binario
+        
+        
+        Para poder ver el archivo binario en terminal se usa:
+        ls -al que es para ver el tamaño del archivo
+        
+    3.Cerrar archivo:
+        fclose (fp);
+Ejemplo con archivo de texto:
+#include <stdio.h>
+int main (void){
+    int numeros [10] = {2,4,6,8,10,12,14,16,18,20}, i=0;
+    FILE *fp;
+    
+    //imprimir en archivo
+    fp = fopen ("numeros.txt", "w");
+    
+    for (i=0; i<10; i++){
+        fprintf (fp, "%d ", numeros[i]);
+    }
+    fclose (fp);
+    
+    
+    //imprimirlo en pantalla
+    fp = fopen ("numeros.txt", "r");
+    if (fp == NULL){
+        printf ("Error, el archivo no existe\n");
+        return 0;
+    }
+    
+    while ( fscanf(fp, "%d", &i) == 1){
+        printf ("%d", i);
+    }
+    printf ("\n");
+    fclose (fp);
+    return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ejemplo con archivo binario:
+#include <stdio.h>
+int main (void){
+    int numeros [10] = {2,4,6,8,10,12,14,16,18,20};
+    int i=0;
+    int numerosbin [10];
+    
+    FILE *fp;
+    
+    fp = fopen ("numeros.bin", "wb");
+    fwrite (numeros, sizeof(int), 10, fp);
+    
+    fclose (fp);
+    
+    //para imprimir y verificar que se escribio en el archivo
+    fp = fopen ("numeros.bin", "rb");
+    if (fp == NULL)
+    {
+        printf ("Error\n");
+        return 0;
+    }
+    
+    fread (numerosbin, sizeof(int), 10, fp);
+    
+    fclose (fp);
+    
+    printf ("Contenido del archivo binario: ");
+    for (i=0; i<10; i++)
+    {
+        printf ("%d ", numerosbin[i]);
+    }
+    printf ("\n");
+    return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Funciones utiles para los 2 tipos de archivo:
+    * fseek (fp, NumeroPaquetes, posicion); - Mover el apuntador
+    Donde
+        posicion esta definida por una constante, por ejemplo:
+            SEEK_SET - Desde el inicio del archivo
+            SEEK_CUR - Desde la posicion actual del fp
+            SEEK_END - Desde el final
+    Ejemplo:
+        fseek (fp, 1, SEEK_CUR);
+        
+    * ftell (fp); - Regresa la distancia en bytes desde el inicio del archivo hasta la posicion actual de fp
+    
+    
+    
+        -----------------------------------
+        ---13.MANEJO DINAMICO DE MEMORIA---
+        -----------------------------------
+Es la manera en la cual podemos crear espacios en la memoria conforme los vamos ocupando
+se usa la funcion malloc de la libreria stdlib, esta reserva un espacio en memoria, regresa la primera direccion de memoria que se solicita
+Por ejemplo, se hace de la siguiente forma:
+    int n;
+    char *palabra;
+    printf ("Dame la longitud: ");
+    scanf ("%d", &n);
+    
+    palabra = malloc ( n*sizeof(char) ); //se reservan n espacios del tamaño de un caracter
+    if (palabra ==  NULL){ //es buena practica verificar que el apuntador sea diferente de nulo
+        printf ("No hay memoria\n");
+        return 0;
+    }
+    
+    //se puede usar la notacion arreglo o apuntador, por ejemplo:
+    palabra [0] = 'h';
+    palabra [1] = 'o';
+    palabra [2] = 'l';
+    palabra [3] = 'a';
+    // o se podria hacer:
+    strcpy (palabra, "hola");
+    
+    
+    
+        -------------------------
+        ---14.LISTAS DINAMICAS---
+        -------------------------
+Existen 3 tipos de lista:
+    FIFO (First In First Out)
+    LIFO (Last In First Out)
+    Circulares (Son tipo agenda, se regresan al inicio)
+    
+Para crearlas se necesitan 3 pasos que siempre van a estar en un ciclo:
+    1.Crear el espacio
+    2.Llenar la informacion
+    3.Encadenar (dependiendo del tipo de lista)    
+    
+    ----------------------------------
+    ---14.1.EJEMPLO LISTA TIPO FIFO---
+    ----------------------------------
+    typedef struct datos{
+        char letra;
+        struct datos *sig; //va a permitir ligar cada uno de los elementos de la lista
+    }lista;
+    
+    int main (void)
+    {
+        lista *inicio, *nodo, *aux; //se declaran siempre estas 3 variables como variables locales en la funcion main
+        inicio = NULL; //se hace en cualquier tipo de lista para definir que la lista esta vacia
+    
+        //1. Crear el espacio
+        nodo = malloc ( ziseof(lista) );
+        if (nodo == NULL)
+        {
+            printf ("No hay memoria\n");
+            return 0;
+        }
+    
+        //2.Llenar la informacion (depende de cada programa)
+        printf ("Letra: ");
+        scanf ("%c", &nodo->letra);
+        
+        //3.Encadenamiento (esta divido en 2 partes)
+        if (inicio == NULL) //cuando es el primer elemento de la lista
+        {
+            inicio = nodo;
+        }
+        
+        else
+        {
+            aux->sig = nodo;
+        }
+        aux = nodo;
+        nodo->sig = NULL;
+    }
+    
+    ---Recorrido de la lista---
+nodo = inicio;
+while (nodo != NULL)
+{
+printf ("%c", nodo->letra);
+nodo = nodo->sig;
+}
+    ---Liberar los espacios que ocupamos---
+Esto se hace para cualquier lista, ya que los espacios de memoria que ocupamos, se marcan como no disponibles aun despues de cerrar el programa
+Por lo que hay que liberar los espacios de la siguiente manera:
+nodo = inicio;
+while (nodo != NULL)
+{
+inicio = inicio->sig;
+free (nodo);
+nodo = inicio;
+}
+    ---------------------------
+    ---14.2.LISTAS TIPO LIFO---
+    ---------------------------
+Los pasos son similares a los de la lista anterior, solamente cambia el encadenamiento y que no se necesita el auxiliar
+Paso 1 - Crear el espacio
+    nodo= malloc ( sizeof(lista) );
+    if (nodo == NULL){
+        prinf ("No hay memoria\n");
+    }
+Paso 2 - Llenar informacion
+    printf ("Letra: ");
+    scanf ("%c", &nodo->letra);
+    
+Paso 3 - Encadenamiento
+    if (inicio == NULL){
+        nodo->sig = NULL;
+    }
+    else {
+        nodo->sig = inicio;
+    }
+    inicio = nodo;
+    
+    ----------------------------
+    ---14.3.LISTAS CIRCULARES---
+    ----------------------------
+Mismos pasos, ejemplo con lista de numeros:
+typedef struct datos{
+    int numero;
+    struct *datos sig;
+}lista;
+int main (){
+lista *inicio, *aux, *nodo;
+inicio = NULL;
+}
+Paso 1 - Crear el espacio
+    nodo = malloc ( sizeof(lista) );
+    if (nodo == NULL){
+        printf ("No se encontro espacio\n");
+    }
+    
+Pas 2 - Llenar la informacion
+    printf ("Numero: ");
+    scanf ("%d", &nodo->numero);
+    
+Paso 3 - Encadenamiento
+    if (inicio == NULL){
+        inicio = nodo;
+    }
+    else {
+        aux->sig = nodo;
+    }       
+    aux = nodo;
+    nodo->sig = inicio;
+Recorrido de la lista
+    if (inicio != NULL){
+        nodo = inicio;
+        do {
+            printf ("%d", nodo->numero);
+            nodo = nodo->sig;
+        }while (nodo != inicio);
+    }
+    
+Liberar espacio
+    if (inicio != NULL){
+        nodo = inicio;
+        aux = inicio;
+        do {
+            nodo = nodo->sig;
+            free (aux);
+            aux = nodo;
+        }while (nodo != inicio); 
+    }
+    
+    
+    
+    --------------------------------------
+    ---15.LISTAS DOBLEMENTE ENCADENADAS---
+    --------------------------------------
+Listas en donde podemos recorrer la lista de inicio a fin o de fin a inicio
+typedef struct datos{
+    int numeros;
+    struct datos *sig;
+    struc datos *ant;
+}lista;
+int main (void){
+lista *inicio, *aux, *nodo;
+inicio = NULL;
+Paso 1 - crear el espacio
+    nodo = malloc ( sizeof(lista) );
+    if (nodo == NULL){
+        prinf ("No hay espacio");
+        exit (1);
+    }
+    
+Paso 2 - llenar la informacion
+    printf ("NUmero: ");
+    scanf ("%d", &nodo->numero);
+    
+Paso 3 - Encadenamiento
+    if (inicio == NULL){
+        inicio = nodo;
+        inicio->ant = NULL;
+    }
+    else {
+        nodo->ant = aux;
+        aux->sig = nodo;
+    }
+    aux = nodo;
+    nodo->sig = NULL;
+}
+        
+Recorrido de la lista
+de inicio a fin:
+    nodo = inicio;
+    while (nodo != NULL){
+        printf ("%d\n", nodo->numero);
+        nodo = nodo->sig;
+    }
+        
+de fin a inicio
+    nodo = aux;    
+    while (nodo != NULL){
+        printf ("%d\n", nodo->numero);
+        nodo = nodo->ant;
+    }
+    
+Liberar el espacio
+    nodo = inicio;
+    while (nodo != NULL){
+        inicio = inicio->sig;
+        free (nodo);
+        nodo= inicio;    
+    }      
+    
+    -----------------------------------------------
+    ---15.1.LISTA CIRCULAR DOBLEMENTE ENCADENADA---
+    -----------------------------------------------
+typedef struct datos{
+    int numeros;
+    struct datos *sig;
+    struc datos *ant;
+}lista;
+int main (void){
+lista *inicio, *aux, *nodo;
+inicio = NULL;
+Paso 1 - crear el espacio
+    nodo = malloc ( sizeof(lista) );
+    if (nodo == NULL){
+        prinf ("No hay espacio");
+        exit (1);
+    }
+    
+Paso 2 - llenar la informacion
+    printf ("NUmero: ");
+    scanf ("%d", &nodo->numero);
+    
+Paso 3 - Encadenamiento
+    if (inicio == NULL){
+        inicio = nodo;
+    }
+    else {
+        nodo->ant = aux;
+        nodo->sig = inicio;
+    }
+    aux->sig = nodo;
+    aux = nodo;
+    inicio->ant = nodo;
+    
+        
+Recorrido de la lista
+De princio a fin:
+    if (inicio != NULL){
+        nodo = inicio;
+        do {
+            printf ("%d\n", nodo->numero);
+            nodo = nodo->sig;
+        }while (nodo != inicio);                
+    }
+    
+de fin a inicio
+    if (inicio != NULL){
+        nodo = aux;
+        do {
+            printf ("%d\n", nodo->numero);
+            nodo = nodo->ant;
+        }while (nodo != aux);
+    }
+    
+Liberar espacio
+if (inicio != NULL){
+nodo = inicio;
+aux = inicio;
+do
+    {
+    aux = aux->sig;
+    free (nodo);
+    nodo = aux;
+    }while (nodo != inicio);
+}
+        -------------------------
+        ---16.ARBOLES BINARIOS---
+        -------------------------
+Tipo de datos que son listas encadenadas, tienen 2 apuntadores izquierdo y derecho, que a su vez estos tienen apuntadores izquierdo y derecho
+Donde se divide por niveles, y el principal es llamado nodo raiz
+El maximo numero de nodos por nivel es 2^n, donde n es el nivel
+Se usan en inteligencia artificiales para arboles de decisiones, o por ejemplo en el juego 'akinator' para la toma de decisiones u ordenamiento de informacion
+Se dice que un arbol esta balanceado si existe el mismo numero de nodos a la izquierda que a la derecha, entre mas ordenado este, mas facil sera buscar la informacion
+        ------------------------
+        ---17.BIBLIOTECAS GTK---
+        ------------------------
+Conjunto de bibliotecas que nos permiten desaarrollar programas en ambiente grafico
+Widgets (elementos con los que podemos trabajar para crear la vista)
+MVC (Modelo Vista Controlador) -
+    El modelo es como se maneja la informacion de un programa
+    La vista es lo que el usuario puede ver, y que tiene lugar de almacenamiento en el modelo
+    El controlador es el conjunto de funciones que permiten manejar todos los datos, para obtenerlos o desplegarlos a la vista
+    
+Los 7 pasos para la creaccion dde un programa en GTK:
+1- Inicializar el ambiente                      -> //
+2- Crear widgets y fijar sus atributos          -> Por ejemplo, el tamaño de una ventana y su titulo
+3- Registrar las llamadas a las  funciones      -> Que se quiere hacer al interactuar con c/u de los elementos, son llamados callbacks
+4- Definir la jerarquia                         -> "Ensamblar" los widgets para construir la interfaz grafica
+5- Mostrar widgets                              -> Mostrar en pantalla los que hicimos en el paso numero 4
+6- Procesar señales y eventos                   -> Verificar las acciones realizadas por el usuario
+7- Salir del programa                           -> //
+Todos los tipos de datos propios de GTK no son mas que una estructura, cada estructura tiene  en su estructura el nombre de la estructura que hereda, como primer elemento.
+Un boton puede recibir 5 señales:
+Clicked -   Se genera al clickear sobre el boton
+Enter -     Se genera cuando el mouse entra en el area del boton
+Leave -     Se genera cuando el mouse sale del area del boton
+Pressed -   Se genera cuando se deja presionado el click sobre el boton
+Released -  Se genera cuando se deja de presionar sobre el boton
+    
+void nombre (GtkWidget *widget, gpointer info){
+}
+    ---------------------------------------
+    ---COMPILACIÓN DE UN PROGRAMA EN GTK---
+    ---------------------------------------
+gcc -Wall -o programa.out programa.c `pkg-config--cflags --libs gtk+-2.0`
+Ejemplo con Makefile:
+menu.out: menu.o
+    gcc -Wall -o menu.out menu.o `pkg-config --libs gtk+-2.0` 
+      
+menu.o: menu.c
+    gcc -c menu.c `pkg-config --cflags gtk+-2.0`
+clean:
+    rm *.o
+    
+CREAR UNA TABLA EN GTK
+gtk_table_new (gint renglones, gint columnas, gboolean homogéneo);
+Agregar elementos:
+gtk_table_attach_defaults (GtkTable *table, GtkWidget *widget, gint izq, gint der, gint sup, gint inf); 
+CREAR UNA BARRA DE MENU EN GTK:
+gtk_menu_bar_new ();
+CREAR MENU ITEMS:
+gtk_menu_item_new_with_label (gchar *label);
+CrREAR UN MENU:
+gtk_menu_new (void);
+Agregar items a la barra de menu:
+gtk_menu_shell_append (GtkMenuShell *menu, GtkWidget *menuItem);
+Asociar un menu a un menuItem:
+gtk_menu_item_set_submenu (GtkMenu *menuItem, GtkWidget *menu);
+Agregar un menuItem a la barra de menu:
+gtk_menu_bar_append (GtkMenuBar *menubar, GtkWidget *menuItem);
+

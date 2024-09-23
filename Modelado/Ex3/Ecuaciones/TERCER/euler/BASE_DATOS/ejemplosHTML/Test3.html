@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<title>
+			Ejemplo de contenido dinamico
+		</title>
+	</head>
+	<script type="text/javascript" src="javascript.js"></script>
+	<script type="text/javascript">
+  	<!--
+        
+	function calcula_monto(campo){
+		var precio = document.getElementById('unitario').innerHTML;
+		var cantidad = campo.value;
+		var monto = 0;
+		
+		//alert('Se cambio la cantidad '+cantidad+' texto que va aqui');
+		
+		monto = precio * cantidad;
+		
+		var respuesta = formatNumber(monto);
+		
+		//document.getElementById('total').innerHTML = monto;
+		document.getElementById("total").innerHTML = respuesta;
+	}
+	
+	
+	
+	
+	
+	
+	
+	function MuestraMensaje(){
+		if (confirm('Esta seguro?')) {
+			alert('Dijo que s’');
+		}
+		else{
+			alert('Dijo que no');
+		}
+	}
+	
+	//-->
+ 	 </script>
+	<body>
+		<h1>
+			Carrito de compras
+		</h1>
+		<form method="get" action="">
+			<table border="0" width="100%" cellpadding="0" cellspacing="5">
+				<tr>
+					<td> Cantidad </td>
+					<td> T&iacute;tulo</td>
+					<td> Precio Unitario</td>
+					<td> Total</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="cantidad" value="1" size="3" onChange="calcula_monto(this);">
+					</td>
+					<td>JavaScript The Definitive Guide</td>
+					<td>$ <span id="unitario"> 49.99 </span> </td>
+					<td>$ <span id="total">49.99 </span></td>
+				</tr>
+			</table>
+			<input type="button" value="Comprar" onClick="MuestraMensaje();">
+		</form>
+	</body>
+</html>

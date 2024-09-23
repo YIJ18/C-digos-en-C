@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int main(void)
+{
+  int x, y, z;
+  x = 0;
+  while (x < 10)
+  {
+    x = x + 1;
+    printf("%d\n", x);
+  }
+
+  for (y = 1; y <= 10; y++)
+  {
+    printf("%d\n", y);
+  }
+  z = 1;
+  do
+  {
+    printf("%d\n", z);
+    z++;
+  } while (z <= 10);
+  return 0;
+}

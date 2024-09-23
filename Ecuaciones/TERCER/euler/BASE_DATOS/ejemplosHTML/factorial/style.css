@@ -1,0 +1,35 @@
+#forma{
+	
+	position: relative;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:150px;
+	width: 30%;
+	border-style:solid;
+	border-width:2px;
+	border-color: #A0A0A0;
+	border-radius: 15px;
+	box-shadow: 7px 7px 3px #888888;
+	padding: 15px;
+	font-family: Verdana;
+	font-size: 13px;
+}
+
+.round{
+	border-width:1px;
+	border-color: #A0A0A0;
+	border-radius: 5px;
+}
+
+td.dato{
+	text-align:right;
+}
+
+tr.renglonInvisible{
+	visibility: hidden;
+}
+
+
+tr.renglonVisible{
+	visibility: visible;
+}

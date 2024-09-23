@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#define h 0.01
+
+double F(double x, double y);
+
+double x_derivada_atras(double x, double y, int n);
+double y_derivada_atras(double x, double y, int n);
+double x_y_derivada_atras(double x, double y, int n);
+
+int main(void)
+{
+    double x = 0.0, y = 0.0;
+    int i = 1;
+
+    printf("Dame el valor de x: ");
+    scanf("%lf", &x);
+    printf("Dame el valor de y: ");
+    scanf("%lf", &y);
+    // system("clear");
+    printf("\n--------------------------------------\n");
+    printf(" Derivada (x = %.2lf) (y = %.2lf)\n", x, y);
+    printf("--------------------------------------\n");
+    printf("\t Fx = %.6lf\n", x_derivada_atras(x, y, 1));
+    printf("\t Fy = %.6lf\n", y_derivada_atras(x, y, 1));
+
+    printf("\t Fxx = %.6lf\n", x_derivada_atras(x, y, 2));
+    printf("\t Fyy = %.6lf\n", y_derivada_atras(x, y, 2));
+
+    printf("\t Fxy = %.6lf\n", x_y_derivada_atras(x, y, 2));
+    printf("\t Fyx = %.6lf\n", x_y_derivada_atras(x, y, 2));
+
+    printf("\n");
+    return 0;
+}
+
+/**
+ * Función para evaluar F(x)
+ *
+ * @param x Valor de x
+ * @return El resultado de F(x)
+ */
+double F(double x, double y)
+{
+    return (x * x) + y;
+}
+
+/**
+ * Calcula la derivada de x derivada atrás de F(x) en los puntos x, y
+ *
+ * @param x Punto en el que se calcula la derivada
+ * @param n Orden de la derivada
+ * @return El valor de la n-ésima derivada atrás
+ */
+double x_derivada_atras(double x, double y, int n)
+{
+    if (n == 0)
+        return F(x, y);
+    else
+        return (x_derivada_atras(x, y, n - 1) - x_derivada_atras(x - h, y, n - 1)) / h;
+}
+
+/**
+ * Calcula la derivada de y derivada atrás de F(x) en los puntos x, y
+ *
+ * @param x Punto en el que se calcula la derivada
+ * @param y Punto en el que se calcula la derivada
+ * @param n Orden de la derivada
+ * @return El valor de la derivada  hacia atrás
+ */
+double y_derivada_atras(double x, double y, int n)
+{
+    if (n == 0)
+        return F(x, y);
+    else
+        return (y_derivada_atras(x, y, n - 1) - y_derivada_atras(x, y - h, n - 1)) / h;
+}
+
+/**
+ * Calcula la derivada de y derivada atrás de F(x) en los puntos x, y
+ *
+ * @param x Punto en el que se calcula la derivada
+ * @param y Punto en el que se calcula la derivada
+ * @param n Orden de la derivada
+ * @return El valor de la derivada  hacia atrás
+ */
+double x_y_derivada_atras(double x, double y, int n)
+{
+    if (n == 0)
+        return F(x, y);
+    else
+    {
+        if (n == 2)
+            return (y_derivada_atras(x, y, n - 1) - y_derivada_atras(x, y - h, n - 1)) / h;
+        else
+            return (x_derivada_atras(x, y, n - 1) - x_derivada_atras(x - h, y, n - 1)) / h;
+    }
+}

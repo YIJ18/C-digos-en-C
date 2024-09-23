@@ -1,0 +1,8 @@
+
+strcat: Pega una frase a otra || arr1 = Hola    arr2 = Iris     con strcat: arr = Hola Iris
+    Se usa
+strcopy: Copia un arreglo en otro || arr1 = Hola  con strcopy arr2 = Hola
+    Se usa 
+strcmp :
+strtok : Separa las frases como un delimitador
+

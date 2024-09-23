@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<title>
+			Operaciones
+		</title>
+	</head>
+	<script type="text/javascript">
+	<!--
+	  function verifica(nombre)
+		{
+			if(nombre.length == 0){
+				alert("Falta el nombre");
+				document.userForm.nombre.focus();
+				return false;
+			}
+			
+			if(document.userForm.numero.value == 0){
+				alert("Falta el n\u00FAmero");
+				document.userForm.numero.focus();
+				return false;
+			}
+				
+			if (document.userForm.operacion[1].checked) {
+				if(document.userForm.exponente.value == 0){
+					alert("Falta el exponente");
+					document.userForm.exponente.focus();
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		function apareceExponente()
+		{
+			var renglonItem = document.getElementById('renglonInvisible');
+			
+			if (document.userForm.operacion[1].checked == true) {
+				renglonItem.className = 'renglonVisible';
+			}
+			else{
+				renglonItem.className = 'renglonInvisible';
+			}
+		}
+	// -->
+	</script>
+	<body>
+		<div id="forma">
+			<div align="center"><strong>Factorial o Potencia</strong></div><br>
+			<form method="post" action="factorial.php" name="userForm"
+			      onSubmit="return verifica(document.userForm.nombre.value);">
+					<table border="0" width="50%" align="center">
+						<tr>
+							<td class="dato">
+								Nombre:
+							</td>
+							<td>
+							  <input type="text" name="nombre"
+								 size="10" class="round">
+							</td>
+						</tr>
+						<tr>
+							<td class="dato">
+								N&uacute;mero:
+							</td>
+							<td>
+							  <input type="number" name="numero"
+								 min="0" max="10" step="1" value="1"
+								 class="round">
+							</td>
+						</tr>
+						<tr class="renglonInvisible" id="renglonInvisible">
+							<td class="dato">
+								Exponente:
+							</td>
+							<td>
+							  <input type="number" name="exponente"
+								 min="0" max="5" step="1" value="1"
+								 class="round">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+							  <input type="radio" name="operacion"
+								 value="1" onclick="apareceExponente();"
+								 checked> Factorial &nbsp;&nbsp;&nbsp;&nbsp;
+							  <input type="radio" name="operacion"
+								 value="2"
+								 onclick="apareceExponente();"> Potencia
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<input type="submit" value="Enviar">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>
+			Ejemplo de contenido dinamico
+		</title>
+	</head>
+	<body>
+		<h1>
+			Carrito de compras
+		</h1>
+		<form method="get" action="test.php">
+			<table border="0" width="100%" cellpadding="0" cellspacing="5">
+				<tr>
+					<td> Cantidad </td>
+					<td> T&iacute;tulo</td>
+					<td> Precio Unitario</td>
+					<td> Total</td>
+				</tr>
+				<tr>
+					<td><input type="text" name="cantidad" value="0" size="3" maxlength="3" onchange="total.value = unitario.value * cantidad.value;"></td>
+					<td>JavaScript The Definitive Guide</td>
+					<td>$ <input type="text" value="49.99" name="unitario" readonly> </td>
+					<td>$ <input type="text" value="0.00" name="total" readonly> </td>
+				</tr>
+			</table>
+			<input type="submit" value="Comprar">
+		</form>
+	</body>
+</html>

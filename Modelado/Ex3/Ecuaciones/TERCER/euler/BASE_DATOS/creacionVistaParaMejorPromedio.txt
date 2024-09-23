@@ -1,0 +1,1 @@
+CREATE VIEW vcalificaciones AS select a.nombre, e.fechaExamen,e.tipoExamen, c.calificacion FROM alumnos a LEFT JOIN calificaciones c ON (a.idAlumno = c.idAlumno) LEFT JOIN examenes e ON(c.idExamen = e.idExamen) LEFT JOIN tipo USING(idTipo);
